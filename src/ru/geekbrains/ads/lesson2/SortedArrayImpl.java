@@ -7,6 +7,10 @@ public class SortedArrayImpl<E extends Comparable<? super E>> extends ArrayImpl<
         this.data = (E[]) new Comparable[initialCapacity];
     }
 
+    public SortedArrayImpl() {
+        
+    }
+
     // O(logN)
     @Override
     public int indexOf(E value) {

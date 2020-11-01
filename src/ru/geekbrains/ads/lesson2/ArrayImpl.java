@@ -168,6 +168,11 @@ public class ArrayImpl<E extends Comparable<? super E>> implements Array<E> {
         }
     }
 
+    @Override
+    public E[] toArray() {
+        return data;
+    }
+
     private void checkIndex(int index) {
         if (index < 0 || index >= size) {
             throw new MyCustomArrayIndexOutOfBoundsException(index, size);
