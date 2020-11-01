@@ -2,14 +2,14 @@ package ru.geekbrains.ads.lesson3.queue;
 
 public class QueueImpl<E> implements Queue<E> {
 
-    private static final int DEFAULT_HEAD = 0;
-    private static final int DEFAULT_TAIL = -1;
+    protected static final int DEFAULT_HEAD = 0;
+    protected static final int DEFAULT_TAIL = -1;
 
     protected E[] data;
     protected int size;
 
-    private int head;
-    private int tail;
+    protected int head;
+    protected int tail;
 
     @SuppressWarnings("unchecked")
     public QueueImpl(int maxSize) {

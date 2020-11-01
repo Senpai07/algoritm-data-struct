@@ -1,5 +1,7 @@
 package ru.geekbrains.ads.lesson3.stack;
 
+import ru.geekbrains.ads.lesson2.Array;
+
 public class StackImpl<E> implements Stack<E> {
 
     private E[] data;
