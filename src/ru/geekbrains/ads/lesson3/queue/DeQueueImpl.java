@@ -7,6 +7,16 @@ public class DeQueueImpl<E> extends QueueImpl<E> implements DeQueue<E> {
 
     @Override
     public boolean insertRight(E value) {
+        return super.insert(value);
+    }
+
+    @Override
+    public E removeLeft() {
+        return super.remove();
+    }
+
+    @Override
+    public boolean insertLeft(E value) {
         if (isFull()) {
             return false;
         }
@@ -20,7 +30,7 @@ public class DeQueueImpl<E> extends QueueImpl<E> implements DeQueue<E> {
     }
 
     @Override
-    public E removeLeft() {
+    public E removeRight() {
         if (isEmpty()) {
             return null;
         }
