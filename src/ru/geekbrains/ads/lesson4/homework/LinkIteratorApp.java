@@ -131,7 +131,17 @@ public class LinkIteratorApp {
         LinkInterator itr = new LinkInterator(list);
 
         itr.insertAfter("Artem", 20);
+        itr.insertAfter("Vova", 20);
+        itr.insertAfter("Gena", 20);
         itr.insertBefore("Sergey", 10);
+        itr.insertBefore("Tolik", 10);
+        itr.insertBefore("Oleg", 10);
+
+        itr.reset();
+        itr.deleteCurrent();
+
+        itr.atEnd();
+        System.out.println(itr.getCurrent().name);
 
         list.display();
     }
