@@ -4,6 +4,7 @@ import ru.geekbrains.ads.lesson3.queue.Queue;
 import ru.geekbrains.ads.lesson3.stack.Stack;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class TestApp4 {
@@ -11,7 +12,21 @@ public class TestApp4 {
 //        testLinkedList();
 //        testStack();
 //        testQueue();
-        testForEach();
+//        testForEach();
+        testIterator();
+    }
+
+    private static void testIterator() {
+        SimpleLinkedListImpl<Integer> linkedList = new SimpleLinkedListImpl<>();
+        linkedList.insertFirst(1);
+        linkedList.insertFirst(2);
+        linkedList.insertFirst(3);
+        linkedList.insertFirst(4);
+
+        Iterator itr = linkedList.iterator();
+
+        while (itr.hasNext())
+            System.out.println(itr.next());
     }
 
     private static void testForEach() {
