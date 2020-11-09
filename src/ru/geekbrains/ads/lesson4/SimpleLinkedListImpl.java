@@ -9,23 +9,26 @@ public class SimpleLinkedListImpl<E> implements LinkedList<E> {
 
     protected Node<E> firstElement;
 
-    private class SimpleLinkedListIterator<E> implements Iterator<E> {
+    private class SimpleLinkedListIterator<T> implements Iterator<T> {
 
-        private Node<E> current;
+        private Node<T> current;
 
         @Override
         public boolean hasNext() {
-            if(current == null){
-                current = (Node<E>) firstElement;
-                return Optional.ofNullable(current).isPresent();
-            }else{
-                current = current.next;
-                return Optional.ofNullable(current).isPresent();
+            if (current == null) {
+                return Optional.ofNullable((Node<T>) firstElement).isPresent();
+            } else {
+                return Optional.ofNullable(current.next).isPresent();
             }
         }
 
         @Override
-        public E next() {
+        public T next() {
+            if (current == null) {
+                current = (Node<T>) firstElement;
+            } else {
+                current = current.next;
+            }
             return current.item;
         }
     }
