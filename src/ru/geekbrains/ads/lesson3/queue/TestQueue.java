@@ -5,6 +5,7 @@ public class TestQueue {
     public static void main(String[] args) {
         testQueue();
         testPriorityQueue();
+        testDeque();
     }
 
     private static void testQueue() {
@@ -34,5 +35,58 @@ public class TestQueue {
         Queue<Integer> queue = new PriorityQueue<>(5);
         System.out.println("testPriorityQueue:");
         testBody(queue);
+    }
+
+    private static void testDeque() {
+        System.out.println("testDeque:");
+        DeQueue<Integer> deQueue = new DeQueueImpl<>(6);
+        insertRight(deQueue, 1);
+        insertRight(deQueue, 2);
+        insertRight(deQueue, 3);
+        insertRight(deQueue, 4);
+        insertLeft(deQueue, 5);
+        insertLeft(deQueue, 6);
+
+        removeLeft(deQueue);
+        removeRight(deQueue);
+
+//        displayRightToLeft(deQueue);
+        displayLeftToRight(deQueue);
+    }
+
+    private static <E> void displayRightToLeft(DeQueue<E> deQueue) {
+        while (!deQueue.isEmpty()) {
+            System.out.println(deQueue.removeRight());
+        }
+    }
+
+    private static <E> void displayLeftToRight(DeQueue<E> deQueue) {
+        while (!deQueue.isEmpty()) {
+            System.out.println(deQueue.removeLeft());
+        }
+    }
+
+    private static <E> void removeLeft(DeQueue<E> deQueue) {
+        if (!deQueue.isEmpty()) {
+            deQueue.removeLeft();
+        }
+    }
+
+    private static <E> void removeRight(DeQueue<E> deQueue) {
+        if (!deQueue.isEmpty()) {
+            deQueue.removeRight();
+        }
+    }
+
+    private static <E> void insertRight(DeQueue<E> deQueue, E value) {
+        if (!deQueue.isFull()) {
+            deQueue.insertRight(value);
+        }
+    }
+
+    private static <E> void insertLeft(DeQueue<E> deQueue, E value) {
+        if (!deQueue.isFull()) {
+            deQueue.insertLeft(value);
+        }
     }
 }
