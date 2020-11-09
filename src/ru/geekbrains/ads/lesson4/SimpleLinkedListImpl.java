@@ -1,10 +1,41 @@
 package ru.geekbrains.ads.lesson4;
 
+import java.util.Iterator;
+import java.util.Optional;
+
 public class SimpleLinkedListImpl<E> implements LinkedList<E> {
 
     protected int size;
 
     protected Node<E> firstElement;
+
+    private class SimpleLinkedListIterator<T> implements Iterator<T> {
+
+        private Node<T> current;
+
+        @Override
+        public boolean hasNext() {
+            if (current == null) {
+                return Optional.ofNullable((Node<T>) firstElement).isPresent();
+            } else {
+                return Optional.ofNullable(current.next).isPresent();
+            }
+        }
+
+        @Override
+        public T next() {
+            if (current == null) {
+                current = (Node<T>) firstElement;
+            } else {
+                current = current.next;
+            }
+            return current.item;
+        }
+    }
+
+    public Iterator<E> iterator() {
+        return new SimpleLinkedListIterator();
+    }
 
     @Override
     public void insertFirst(E value) {
