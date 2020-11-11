@@ -13,8 +13,7 @@ public class ShowFiles {
     private static void viewDir(String prefix, File root) {
         if (root.isFile()) {
             System.out.println(prefix + "File: " + root.getName());
-        }
-        else {
+        } else {
             System.out.println(prefix + "Dir: " + root.getName());
             for (File file : Objects.requireNonNull(root.listFiles())) {
                 viewDir(prefix + "  ", file);

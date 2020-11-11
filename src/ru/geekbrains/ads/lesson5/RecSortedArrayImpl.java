@@ -24,8 +24,7 @@ public class RecSortedArrayImpl<E extends Comparable<? super E>> extends SortedA
 
         if (value.compareTo(get(mid)) > 0) {
             return recBinaryFind(value, mid + 1, high);
-        }
-        else {
+        } else {
             return recBinaryFind(value, low, mid - 1);
         }
     }
