@@ -6,7 +6,7 @@ import java.util.Objects;
 public class ShowFiles {
 
     public static void main(String[] args) {
-        File root = new File("c:\\Users\\OKrylov\\Google Диск\\GeekBrains\\Java. Уровень 3\\");
+        File root = new File("d:\\Coding\\Java\\IdeaProjects\\algoritm-data-struct\\");
         viewDir("", root);
     }
 

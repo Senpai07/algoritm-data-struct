@@ -4,20 +4,20 @@ import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class Anagramm {
+public class Anagram {
 
     private final char[] chars;
     private String word;
     private Set<String> anagramms = new LinkedHashSet<>();
 
-    public Anagramm(String word) {
+    public Anagram(String word) {
         this.word = word;
         this.chars = word.toCharArray();
     }
 
     public static void main(String[] args) {
-        Anagramm anagramApp = new Anagramm("мышка");
-        Collection<String> words = anagramApp.getAnagramm();
+        Anagram anagramApp = new Anagram("mouse");
+        Collection<String> words = anagramApp.getAnagram();
         System.out.println(words.size());
         for (String word : words) {
             System.out.println(word);
@@ -25,19 +25,19 @@ public class Anagramm {
 
     }
 
-    private Collection<String> getAnagramm() {
+    private Collection<String> getAnagram() {
         anagramms.clear();
-        processAnagramm(word.length());
+        processAnagram(word.length());
         return anagramms;
     }
 
-    private void processAnagramm(int length) {
+    private void processAnagram(int length) {
         if (length == 1) {
             return;
         }
 
         for (int i = 0; i < length; i++) {
-            processAnagramm(length - 1);
+            processAnagram(length - 1);
             anagramms.add(String.valueOf(chars));
             rotate(length);
         }
