@@ -17,6 +17,10 @@ public class Exponentiation {
         System.out.println(exp(2, 0));
         System.out.print("2 ^ -3 = ");
         System.out.println(exp(2, -3));
+        System.out.print("0 ^ 3 = ");
+        System.out.println(exp(0, 3));
+        System.out.print("0 ^ -3 = ");
+        System.out.println(exp(0, -3));
     }
 
     // Без возможности возведения в отрицательную степень
@@ -31,21 +35,19 @@ public class Exponentiation {
     }
 
     // С возможностью возведения в отрицательную степень
-    private static float exp(float a, int n) {
-        boolean negative = false;
-        if (n == 0) {
-            return 1;
+    private static double exp(double a, int n) {
+        if (a == 0) {
+            if (n < 0) {
+                throw new IllegalArgumentException("0^(-n) wrong values!");
+            } else if (n == 0) {
+                return 0;
+            }
         }
+
         if (n < 0) {
-            negative = true;
-            n = -n;
-        }
-        if (n == 1) {
-            return a;
-        }
-        a = (a * exp(a, n - 1));
-
-        return negative ? 1 / a : a;
+            return 1 / (a * exp(a, -n - 1));
+        } else if (n > 0) {
+            return a * exp(a, n - 1);
+        } else return 1;
     }
-
 }
