@@ -6,6 +6,7 @@ public class Factorial {
     public static void main(String[] args) {
         System.out.println(factorial(5));
         System.out.println(tailFact(5));
+        System.out.println(fac(5));
     }
 
     private static int tailFact(int n) {
@@ -35,5 +36,9 @@ public class Factorial {
         }
 
         return n * factorial(n - 1);
+    }
+
+    private static int fac(int n) {
+        return (n > 0) ? n * fac(n - 1) : 1;
     }
 }
