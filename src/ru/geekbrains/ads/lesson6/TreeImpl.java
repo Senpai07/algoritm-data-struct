@@ -8,6 +8,10 @@ public class TreeImpl<E extends Comparable<? super E>> implements Tree<E> {
     private Node<E> root;
     private int size;
 
+    public Node<E> getRoot() {
+        return root;
+    }
+
     @Override
     public boolean add(E value) {
         Node<E> newNode = new Node<>(value);
@@ -230,7 +234,5 @@ public class TreeImpl<E extends Comparable<? super E>> implements Tree<E> {
             nBlanks /= 2;
         }
         System.out.println("................................................................");
-
-
     }
 }
