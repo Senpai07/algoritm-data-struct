@@ -9,20 +9,18 @@ public class MainApp {
 
     public static void main(String[] args) {
         int balancedCnt = 0;
-        int unbalancedCnt = 0;
+        int treeCount = 100;
 
-        for (int i = 1000; i > 0; i--) {
+        for (int i = treeCount; i > 0; i--) {
             TreeImpl<Integer> tree = new TreeImpl<>();
             fillTree(tree);
-            tree.display();
             if (isBalanced(tree.getRoot())) {
+                tree.display();
                 balancedCnt++;
-            } else {
-                unbalancedCnt++;
             }
         }
-        System.out.println("Not balanced: " + unbalancedCnt);
         System.out.println("Balanced: " + balancedCnt);
+        System.out.println("Balanced: " + (balancedCnt / (treeCount * 1.0)) * 100 + "%");
 
     }
 
@@ -38,7 +36,7 @@ public class MainApp {
     }
 
     private static void fillTree(TreeImpl<Integer> tree) {
-        while (tree.size() <= 15) {
+        while (tree.size() <= 14) {
             tree.add(ThreadLocalRandom.current().nextInt(-25, 25));
         }
     }
