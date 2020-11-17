@@ -186,7 +186,7 @@ public class Graph {
             System.out.print(" " + curLabel);
         }
         System.out.println();
-        System.out.printf("Кратчайший путь до города %s:%n", finishLabel);
+        System.out.printf("Кратчайший путь из города %s до города %s:%n", startLabel, finishLabel);
         System.out.print(finishLabel);
 
         Edge e;
