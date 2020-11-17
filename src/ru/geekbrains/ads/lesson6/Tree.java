@@ -24,4 +24,6 @@ public interface Tree<E extends Comparable<? super E>> {
 
     void display();
 
+    boolean isBalanced();
+
 }

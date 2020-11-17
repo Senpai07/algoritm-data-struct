@@ -1,24 +1,32 @@
 package ru.geekbrains.ads.lesson6.homework;
 
 import ru.geekbrains.ads.lesson6.Node;
+import ru.geekbrains.ads.lesson6.Tree;
 import ru.geekbrains.ads.lesson6.TreeImpl;
 
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Random;
 
 public class MainApp {
 
     public static void main(String[] args) {
+        Random random = new Random();
         int balancedCnt = 0;
-        int treeCount = 100;
+        int treeCount = 20;
+        int maxLevel = 4;
+        int nodeCount = (int) (Math.pow(2, maxLevel) - 1);
 
-        for (int i = treeCount; i > 0; i--) {
-            TreeImpl<Integer> tree = new TreeImpl<>();
-            fillTree(tree);
-            if (isBalanced(tree.getRoot())) {
-                tree.display();
+        int maxValue = 25;
+
+        for (int i = 0; i < treeCount; i++) {
+            Tree<Integer> theTree = new TreeImpl<>(maxLevel);
+            fillTree(random, nodeCount, maxValue, theTree);
+            if (theTree.isBalanced()) {
                 balancedCnt++;
+                theTree.display();
             }
         }
+
+
         System.out.println("Balanced: " + balancedCnt);
         System.out.println("Balanced: " + (balancedCnt / (treeCount * 1.0)) * 100 + "%");
 
@@ -35,9 +43,9 @@ public class MainApp {
         return node == null ? 0 : 1 + Math.max(height(node.getLeftChild()), height(node.getRightChild()));
     }
 
-    private static void fillTree(TreeImpl<Integer> tree) {
-        while (tree.size() <= 14) {
-            tree.add(ThreadLocalRandom.current().nextInt(-25, 25));
+    private static void fillTree(Random rand, int nodeCount, int maxValue, Tree<Integer> theTree) {
+        for (int j = 0; j < nodeCount; j++) {
+            theTree.add(rand.nextInt(maxValue * 2 + 1) - maxValue);// [-25; 25]
         }
     }
 }
