@@ -5,8 +5,17 @@ import java.util.function.Consumer;
 
 public class TreeImpl<E extends Comparable<? super E>> implements Tree<E> {
 
+    private final int maxLevel;
     private Node<E> root;
     private int size;
+
+    public TreeImpl() {
+        this(0);
+    }
+
+    public TreeImpl(int maxLevel) {
+        this.maxLevel = maxLevel;
+    }
 
     @Override
     public boolean add(E value) {
@@ -25,14 +34,19 @@ public class TreeImpl<E extends Comparable<? super E>> implements Tree<E> {
         }
 
         Node<E> parent = nodeAndParent.parent;
-        if (parent != null) {
+        if (parent == null) {
+            return false;
+        }
+
+        int level = parent.getLevel() + 1;
+        if (level > maxLevel && maxLevel > 0) {
+            return false;
+        }
+
             parent.addChild(newNode);
             size++;
             return true;
-        } else {
-            return false;
-        }
-    }
+     }
 
     @Override
     public boolean contains(E value) {
@@ -43,7 +57,11 @@ public class TreeImpl<E extends Comparable<? super E>> implements Tree<E> {
         Node<E> previous = null;
         Node<E> current = root;
 
+        current.setLevel(1);
         while (current != null) {
+            if (previous != null) {
+                current.setLevel(previous.getLevel() + 1);
+            }
             if (current.getValue().equals(value)) {
                 return new NodeAndParent(current, previous);
             }
@@ -230,7 +248,21 @@ public class TreeImpl<E extends Comparable<? super E>> implements Tree<E> {
             nBlanks /= 2;
         }
         System.out.println("................................................................");
+    }
 
+    @Override
+    public boolean isBalanced() {
+        return isBalanced(root);
+    }
 
+    private boolean isBalanced(Node<E> node) {
+        return (node == null) ||
+                isBalanced(node.getLeftChild()) &&
+                        isBalanced(node.getRightChild()) &&
+                        Math.abs(height(node.getLeftChild()) - height(node.getRightChild())) <= 1;
+    }
+
+    private int height(Node<E> node) {
+        return node == null ? 0 : 1 + Math.max(height(node.getLeftChild()), height(node.getRightChild()));
     }
 }
