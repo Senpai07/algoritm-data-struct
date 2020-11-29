@@ -191,8 +191,7 @@ public class Graph {
 
         Edge e;
         while (!edges.empty()) {
-            e = edges.peek();
-            edges.pop();
+            e =  edges.pop();
             if (e.end().equals(finishLabel)) {
                 finishLabel = e.begin();
                 System.out.print(" <- " + finishLabel);
@@ -202,4 +201,3 @@ public class Graph {
         resetVertexState();
     }
 }
-
