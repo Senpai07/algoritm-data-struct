@@ -1,5 +1,6 @@
 package ru.geekbrains.ads.lesson7;
 
+import ru.geekbrains.ads.lesson7.homework.Edge;
 import java.util.*;
 
 public class Graph {
@@ -38,7 +39,7 @@ public class Graph {
     private int indexOf(String vertexLabel) {
         for (int i = 0; i < vertexList.size(); i++) {
             if (vertexLabel.equals(vertexList.get(i).getLabel())) {
-                return  i;
+                return i;
             }
         }
         return -1;
@@ -64,7 +65,7 @@ public class Graph {
     /**
      * англ. Depth-first search, DFS
      *
-     * @param startLabel
+     * @param startLabel begin vertex
      */
     public void dfs(String startLabel) {
         int startIndex = indexOf(startLabel);
@@ -81,8 +82,7 @@ public class Graph {
             vertex = getNearUnvisitedVertex(stack.peek());
             if (vertex != null) {
                 visitVertex(vertex, stack);
-            }
-            else {
+            } else {
                 stack.pop();
             }
         }
@@ -93,7 +93,7 @@ public class Graph {
     /**
      * англ. breadth-first search, BFS
      *
-     * @param startLabel
+     * @param startLabel begin vertex
      */
     public void bfs(String startLabel) {
         int startIndex = indexOf(startLabel);
@@ -110,8 +110,7 @@ public class Graph {
             vertex = getNearUnvisitedVertex(queue.peek());
             if (vertex != null) {
                 visitVertex(vertex, queue);
-            }
-            else {
+            } else {
                 queue.remove();
             }
         }
@@ -140,9 +139,64 @@ public class Graph {
         stack.push(vertex);
         vertex.setVisited(true);
     }
+
     private void visitVertex(Vertex vertex, Queue<Vertex> queue) {
         System.out.println(vertex);
         queue.add(vertex);
         vertex.setVisited(true);
+    }
+
+    /**
+     * англ. Search Short Path with BFS
+     *
+     * @param startLabel begin vertex
+     * @param finishLabel target vertex
+     */    public void searchPath(String startLabel, String finishLabel) {
+        int startIndex = indexOf(startLabel);
+        if (startIndex == -1) {
+            throw new IllegalArgumentException("Invalid start label");
+        }
+        Queue<Vertex> queue = new LinkedList<>();
+
+        Stack<Edge> edges = new Stack<>();
+
+
+        Vertex vertex = vertexList.get(startIndex);
+        queue.add(vertex);
+
+        System.out.printf("%nОбход вершин:");
+        while (!queue.isEmpty()) {
+            String curLabel = queue.peek().getLabel();
+            vertex = queue.remove();
+            vertex.setVisited(true);
+
+            for (int j = 0; j < getVertexSize(); j++) {
+                if (adjMat[indexOf(curLabel)][j] && !vertexList.get(j).getVisited()) {
+                    vertex = vertexList.get(j);
+                    queue.add(vertex);
+                    vertex.setVisited(true);
+                    String vertexLabel = vertex.getLabel();
+                    edges.push(new Edge(curLabel, vertexLabel));
+                    if (vertexLabel.equals(finishLabel)) {
+                        break;
+                    }
+                }
+            }
+            System.out.print(" " + curLabel);
+        }
+        System.out.println();
+        System.out.printf("Кратчайший путь из города %s до города %s:%n", startLabel, finishLabel);
+        System.out.print(finishLabel);
+
+        Edge e;
+        while (!edges.empty()) {
+            e =  edges.pop();
+            if (e.end().equals(finishLabel)) {
+                finishLabel = e.begin();
+                System.out.print(" <- " + finishLabel);
+            }
+        }
+        System.out.println();
+        resetVertexState();
     }
 }
