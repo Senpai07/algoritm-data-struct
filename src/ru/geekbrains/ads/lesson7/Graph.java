@@ -1,7 +1,6 @@
 package ru.geekbrains.ads.lesson7;
 
 import ru.geekbrains.ads.lesson7.homework.Edge;
-
 import java.util.*;
 
 public class Graph {
